@@ -1,8 +1,9 @@
-var score = 0;
-var timer = 60;
-var hit = 0 ;
-
-function resetGame() {
+async function startGame() {
+    await new Promise((resolve) => {
+      alert("Rule: Just match hit number and random bubbles. Let's Go!");
+      resolve();
+    });
+  
     score = 0;
     timer = 60;
     hit = 0;
@@ -12,6 +13,25 @@ function resetGame() {
     runTimer();
     makeBubble();
     getNewHit();
+}
+
+function resetGame() {
+    if(timer>0){
+        timer = 0;
+        document.querySelector(".pbtm").innerHTML("Terminated");
+    }
+    else{
+        alert("Rule : Just match hit number and random bubbles. Lets Go!");
+        score = 0;
+        timer = 60;
+        hit = 0;
+        document.querySelector("#scorevalue").textContent = score;
+        document.querySelector("#timervalue").textContent = timer;
+        document.querySelector("#hitvalue").textContent = hit;
+        runTimer();
+        makeBubble();
+        getNewHit();
+    }
   }
 
 function makeBubble(){
@@ -56,9 +76,8 @@ document.querySelector(".pbtm").addEventListener("click",function(dets){
 
 
 
-runTimer();
-makeBubble();
-getNewHit();
 document.querySelector("#playAgainBtn").addEventListener("click",function(){
-    resetGame();
+        resetGame();
 })
+
+startGame();
